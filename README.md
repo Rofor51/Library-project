@@ -1,4 +1,5 @@
 # Library-project
+A project for fun. Purpose to get familiar with different tools. Library project will allow users to view, borrow and add reviews to books.
 
 System architectrure
 
