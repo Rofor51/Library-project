@@ -3,6 +3,7 @@ package com.project.library.review.entity;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
 @Document(collection = "user_reviews")
 @NoArgsConstructor
 public class Review {

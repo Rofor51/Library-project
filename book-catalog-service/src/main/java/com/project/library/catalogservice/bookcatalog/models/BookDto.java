@@ -4,6 +4,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.Set;
+
 @NoArgsConstructor
 public class BookDto {
     private Long bookId;
@@ -14,19 +15,19 @@ public class BookDto {
     private Set<AuthorDto> authors;
 
 
-
     public BookDto(String title, Integer pages, Date year, Set<AuthorDto> authors) {
         this.title = title;
         this.pages = pages;
         this.year = year;
         this.authors = authors;
     }
+
     public BookDto(Long authorId, String title, Integer pages, Date year, Set<AuthorDto> authors) {
         this.title = title;
         this.pages = pages;
         this.year = year;
         this.authors = authors;
-        this.bookId=authorId;
+        this.bookId = authorId;
     }
 
     public Long getBookId() {

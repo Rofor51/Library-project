@@ -20,32 +20,38 @@ public class BookServiceImp implements BookService {
     private final AuthorRepository authorRepository;
 
 
-
     @Override
     @Logger
-    public Book createBook(String title, Integer pages, Date year, Set<AuthorDto> authorId) {
-        return bookRepository.save(new Book(title,pages,year,getAndValidateAuthors(authorId)));
+    public Book createBook(String title, Integer pages, String year, Set<AuthorDto> authorId,Boolean isAvailable) {
+        return bookRepository.save(new Book(title, pages, year, getAndValidateAuthors(authorId),isAvailable));
     }
+
     @Logger
     @Override
-    public Book updateBook(Long id, String title, Integer pages, Date year, Set<AuthorDto> authorId) {
-        Optional <Book> book = lookUpBook(id);
-        if(title != null) {
+    public Book updateBook(Long id, String title, Integer pages, String year, Set<AuthorDto> authorId,Boolean isAvailable) {
+        Optional<Book> book = lookUpBook(id);
+        if (title != null) {
             book.get().setTitle(title);
         }
-        if(pages != null) {
+        if (pages != null) {
             book.get().setPages(pages);
         }
-        if(year != null) {
+        if (year != null) {
             book.get().setYear(year);
         }
-        if(authorId != null) {
+        if (authorId != null) {
 
             book.get().setAuthors(getAndValidateAuthors(authorId));
         }
 
+        if (isAvailable != null) {
+
+            book.get().setAvailable(isAvailable);
+        }
+
         return bookRepository.save(book.get());
     }
+
     @Logger
     @Override
     public List<Book> lookUpAllBooks() {
@@ -57,6 +63,7 @@ public class BookServiceImp implements BookService {
     public Optional<Book> lookUpBook(Long id) {
         return Optional.of(validate(id));
     }
+
     @Logger
     @Override
     public List<Book> getBooksByAuthor(Long id) {

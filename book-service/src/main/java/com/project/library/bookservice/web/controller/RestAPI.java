@@ -6,6 +6,7 @@ import com.project.library.bookservice.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,12 +23,20 @@ public class RestAPI {
 
     @GetMapping
     public List<BookDto> getAllBooks() {
-         return bookService.lookUpAllBooks().stream().map(this::convertToDto).collect(Collectors.toList());
+        return bookService.lookUpAllBooks().stream().map(this::convertToDto).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
     public BookDto getBook(@PathVariable("id") Long id) {
         return convertToDto(bookService.lookUpBook(id).get());
+    }
+
+
+    @GetMapping("/validate/{id}")
+    public ResponseEntity<String> validateBook(@PathVariable("id") Long id) {
+
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+                .body("Book" + id + "has been validated.");
     }
 
 
@@ -37,6 +46,7 @@ public class RestAPI {
         return ex.getMessage();
 
     }
+
     private BookDto convertToDto(Book book) {
         BookDto bookDto = modelMapper.map(book, BookDto.class);
         return bookDto;

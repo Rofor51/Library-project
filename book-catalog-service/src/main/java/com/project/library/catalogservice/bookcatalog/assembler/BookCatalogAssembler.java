@@ -16,8 +16,8 @@ import java.util.stream.Collectors;
 public class BookCatalogAssembler implements RepresentationModelAssembler<BookDto, BookCatalog> {
     @Override
     public BookCatalog toModel(BookDto entity) {
-        Set<AuthorDto> authId = entity.getAuthors().stream().map(k -> new AuthorDto(k.getId(),k.getName())).collect(Collectors.toSet());
-        BookCatalog bookDto = new BookCatalog(entity.getBookId(),entity.getTitle(),entity.getPages(),entity.getYear(),authId);
+        Set<AuthorDto> authId = entity.getAuthors().stream().map(k -> new AuthorDto(k.getId(), k.getName())).collect(Collectors.toSet());
+        BookCatalog bookDto = new BookCatalog(entity.getBookId(), entity.getTitle(), entity.getPages(), entity.getYear(), authId);
 
         Link lnk = WebMvcLinkBuilder
                 .linkTo(WebMvcLinkBuilder.methodOn(BookController.class)

@@ -1,6 +1,7 @@
 package com.project.library.review.entity;
 
 import lombok.NoArgsConstructor;
+
 @NoArgsConstructor
 public class ReviewDto {
 
@@ -11,7 +12,7 @@ public class ReviewDto {
     private Double points;
     private String date;
 
-    public ReviewDto(String id, Long bookId,  String username, String comment, Double points, String date) {
+    public ReviewDto(String id, Long bookId, String username, String comment, Double points, String date) {
         this.id = id;
         this.bookId = bookId;
         this.username = username;
@@ -20,14 +21,13 @@ public class ReviewDto {
         this.date = date;
     }
 
-    public ReviewDto(Long bookId, String username, String comment,Double points, String date) {
+    public ReviewDto(Long bookId, String username, String comment, Double points, String date) {
         this.bookId = bookId;
         this.username = username;
         this.comment = comment;
         this.points = points;
         this.date = date;
     }
-
 
 
     public String getId() {

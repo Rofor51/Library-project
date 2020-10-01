@@ -4,27 +4,32 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.Set;
+
 @NoArgsConstructor
 public class BookDto {
     private Long bookId;
     private String title;
     private Integer pages;
-    private Date year;
+    private String year;
+    private Boolean isAvailable;
 
     private Set<AuthorDto> authors;
 
-    public BookDto(String title, Integer pages, Date year, Set<AuthorDto> authors) {
+    public BookDto(String title, Integer pages, String year, Set<AuthorDto> authors,Boolean isAvailable) {
         this.title = title;
         this.pages = pages;
         this.year = year;
         this.authors = authors;
+        this.isAvailable = isAvailable;
     }
-    public BookDto(Long authorId, String title, Integer pages, Date year, Set<AuthorDto> authors) {
+
+    public BookDto(Long authorId, String title, Integer pages, String year, Set<AuthorDto> authors,Boolean isAvailable) {
         this.title = title;
         this.pages = pages;
         this.year = year;
         this.authors = authors;
-        this.bookId=authorId;
+        this.bookId = authorId;
+        this.isAvailable = isAvailable;
     }
 
     public Long getBookId() {
@@ -59,13 +64,19 @@ public class BookDto {
         this.pages = pages;
     }
 
-    public Date getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(Date year) {
+    public void setYear(String year) {
         this.year = year;
     }
 
+    public Boolean getAvailable() {
+        return isAvailable;
+    }
 
+    public void setAvailable(Boolean available) {
+        isAvailable = available;
+    }
 }

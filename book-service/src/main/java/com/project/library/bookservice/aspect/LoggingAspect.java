@@ -16,7 +16,8 @@ public class LoggingAspect {
     private final Logger LOGGER = LoggerFactory.getLogger(LoggingAspect.class);
 
     @Pointcut("@annotation(com.project.library.bookservice.aspect.Logger)")
-    public void executeLoggable() {}
+    public void executeLoggable() {
+    }
 
     @Before("executeLoggable()")
     public void getLogs(JoinPoint joinPoint) {

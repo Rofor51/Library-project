@@ -8,8 +8,12 @@ import java.util.Optional;
 
 public interface ReviewService {
     List<Review> getAllReviews();
+
     List<Review> getReviewsByBook(Long id);
+
     Review createReview(Long bookId, String userName, String comment, Double points, String date);
+
     Review updateReview(String reviewId, String userName, String comment, Double points, String date);
+
     ResponseEntity<?> deleteReview(String reviewId);
 }

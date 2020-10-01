@@ -23,7 +23,6 @@ class LibServiceApplicationTests {
     void contextLoads() {
 
 
-
     }
 
 }

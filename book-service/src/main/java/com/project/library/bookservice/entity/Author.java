@@ -6,23 +6,24 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 @Entity
 @Table(name = "author")
 @NoArgsConstructor
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id",nullable = false)
+    @Column(name = "id", nullable = false)
     private Long id;
-    @Column(name = "name",nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
-    @Column(name = "last_name",nullable = false)
+    @Column(name = "last_name", nullable = false)
     private String lastName;
-    @Column(name = "birth",nullable = false)
+    @Column(name = "birth", nullable = false)
     private Date birth;
 
 
-    @ManyToMany(mappedBy = "authors",fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "authors", fetch = FetchType.LAZY)
     private Set<Book> books = new HashSet<>();
 
 

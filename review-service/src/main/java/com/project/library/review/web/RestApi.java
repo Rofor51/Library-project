@@ -29,18 +29,18 @@ public class RestApi {
     public List<ReviewDto> getReviewsByBookId(@PathVariable("id") Long id) {
         return reviewService.getReviewsByBook(id).stream().map(this::convertToDto).collect(Collectors.toList());
     }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void createReview(@RequestBody @Validated ReviewDto reviewDto) {
-       reviewService.createReview(reviewDto.getBookId(),reviewDto.getUsername(),reviewDto.getComment(),reviewDto.getPoints(),reviewDto.getDate());
+        reviewService.createReview(reviewDto.getBookId(), reviewDto.getUsername(), reviewDto.getComment(), reviewDto.getPoints(), reviewDto.getDate());
     }
+
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
     public ReviewDto updateReview(@RequestBody @Validated ReviewDto reviewDto) {
-        return convertToDto(reviewService.updateReview(reviewDto.getId(),reviewDto.getUsername(),reviewDto.getComment(),reviewDto.getPoints(),reviewDto.getDate()));
+        return convertToDto(reviewService.updateReview(reviewDto.getId(), reviewDto.getUsername(), reviewDto.getComment(), reviewDto.getPoints(), reviewDto.getDate()));
     }
-
-
 
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
@@ -49,6 +49,7 @@ public class RestApi {
         return ex.getMessage();
 
     }
+
     private ReviewDto convertToDto(Review review) {
         ReviewDto bookDto = modelMapper.map(review, ReviewDto.class);
         return bookDto;

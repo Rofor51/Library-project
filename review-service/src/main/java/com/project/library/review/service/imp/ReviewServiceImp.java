@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class ReviewServiceImp implements ReviewService {
@@ -29,24 +30,24 @@ public class ReviewServiceImp implements ReviewService {
 
     @Override
     public Review createReview(Long bookId, String userName, String comment, Double points, String date) {
-        Review review = new Review(bookId,userName,comment,points,date);
+        Review review = new Review(bookId, userName, comment, points, date);
         return reviewRepository.save(review);
     }
 
     @Override
     public Review updateReview(String reviewId, String userName, String comment, Double points, String date) {
         Optional<Review> review = reviewRepository.findById(verifyReview(reviewId).getId());
-        if(review.isPresent()) {
-            if(userName != null) {
+        if (review.isPresent()) {
+            if (userName != null) {
                 review.get().setUsername(userName);
             }
-            if(comment != null) {
+            if (comment != null) {
                 review.get().setComment(comment);
             }
-            if(points != null) {
+            if (points != null) {
                 review.get().setPoints(points);
             }
-            if(date != null) {
+            if (date != null) {
                 review.get().setDate(date);
             }
 

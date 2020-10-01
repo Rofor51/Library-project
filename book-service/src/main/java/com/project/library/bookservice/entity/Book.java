@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 @Entity
 @Table(name = "book")
 @NoArgsConstructor
@@ -20,21 +21,31 @@ public class Book {
     @Column(name = "pages")
     private Integer pages;
     @Column(name = "year")
-    private Date year;
+    private String year;
+    private Boolean isAvailable;
 
     @NotNull
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "author_book",
-            joinColumns = @JoinColumn(name = "book_id",nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "author_id",nullable = false))
+            joinColumns = @JoinColumn(name = "book_id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "author_id", nullable = false))
     private Set<Author> authors = new HashSet<>();
 
-    public Book(String title, Integer pages, Date year, Set<Author> authors) {
+    public Book(String title, Integer pages, String year, Set<Author> authors,Boolean isAvailable) {
         this.title = title;
         this.pages = pages;
         this.year = year;
         this.authors = authors;
+        this.isAvailable = isAvailable;
+    }
+
+    public Boolean getAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(Boolean available) {
+        isAvailable = available;
     }
 
     public Long getId() {
@@ -61,11 +72,11 @@ public class Book {
         this.pages = pages;
     }
 
-    public Date getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(Date year) {
+    public void setYear(String year) {
         this.year = year;
     }
 

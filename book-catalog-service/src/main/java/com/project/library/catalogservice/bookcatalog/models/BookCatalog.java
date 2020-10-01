@@ -5,6 +5,7 @@ import org.springframework.hateoas.RepresentationModel;
 
 import java.util.Date;
 import java.util.Set;
+
 @NoArgsConstructor
 public class BookCatalog extends RepresentationModel<BookCatalog> {
     private Long bookId;
@@ -22,7 +23,8 @@ public class BookCatalog extends RepresentationModel<BookCatalog> {
         this.year = year;
         this.authorDtos = authorDtos;
     }
-    public BookCatalog(Long bookId, String title, Integer pages, Date year, Set<AuthorDto> authorDtos,Set<ReviewsDto> reviews) {
+
+    public BookCatalog(Long bookId, String title, Integer pages, Date year, Set<AuthorDto> authorDtos, Set<ReviewsDto> reviews) {
         this.bookId = bookId;
         this.title = title;
         this.pages = pages;
