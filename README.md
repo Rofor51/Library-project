@@ -8,7 +8,7 @@ TODO
 - Finish frontend (REACT JS)
 - Add security, JWT validation
 - Create, update books
-- Add borrow services
+- finish order services
 - Dockerize
 
-![alt text](https://github.com/Rofor51/Library-project/blob/master/diagram.png)
+![alt text](https://github.com/Rofor51/Library-project/blob/master/dig.png)
