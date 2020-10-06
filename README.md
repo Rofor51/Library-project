@@ -7,7 +7,6 @@ TODO
 - Add authorization server
 - Finish frontend (REACT JS)
 - Add security, JWT validation
-- Create, update books
 - finish order services
 - Dockerize
 
