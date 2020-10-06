@@ -10,4 +10,8 @@ public interface BookService {
     Optional<BookDto> getBook(Long id);
 
     List<BookDto> getAllBooks();
+
+    void createBook(BookDto bookDto);
+
+    void updateBook(BookDto bookDto);
 }

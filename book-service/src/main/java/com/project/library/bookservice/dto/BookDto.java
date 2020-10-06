@@ -10,26 +10,25 @@ public class BookDto {
     private Long bookId;
     private String title;
     private Integer pages;
-    private String year;
-    private Boolean isAvailable;
-
+    private Date year;
     private Set<AuthorDto> authors;
+    private Boolean available;
 
-    public BookDto(String title, Integer pages, String year, Set<AuthorDto> authors,Boolean isAvailable) {
+    public BookDto(String title, Integer pages, Date year,Boolean available, Set<AuthorDto> authors) {
         this.title = title;
         this.pages = pages;
         this.year = year;
         this.authors = authors;
-        this.isAvailable = isAvailable;
+        this.available = available;
     }
 
-    public BookDto(Long authorId, String title, Integer pages, String year, Set<AuthorDto> authors,Boolean isAvailable) {
+    public BookDto(Long bookId, String title, Integer pages, Date year,Boolean available, Set<AuthorDto> authors) {
         this.title = title;
         this.pages = pages;
         this.year = year;
         this.authors = authors;
-        this.bookId = authorId;
-        this.isAvailable = isAvailable;
+        this.bookId = bookId;
+        this.available = available;
     }
 
     public Long getBookId() {
@@ -64,19 +63,19 @@ public class BookDto {
         this.pages = pages;
     }
 
-    public String getYear() {
+    public Date getYear() {
         return year;
     }
 
-    public void setYear(String year) {
+    public void setYear(Date year) {
         this.year = year;
     }
 
     public Boolean getAvailable() {
-        return isAvailable;
+        return available;
     }
 
     public void setAvailable(Boolean available) {
-        isAvailable = available;
+        this.available = available;
     }
 }

@@ -12,25 +12,28 @@ public class BookCatalog extends RepresentationModel<BookCatalog> {
     private String title;
     private Integer pages;
     private Date year;
+    private Boolean isAvailable;
 
-    private Set<AuthorDto> authorDtos;
+    private Set<AuthorDto> authors;
     private Set<ReviewsDto> reviews;
 
-    public BookCatalog(Long bookId, String title, Integer pages, Date year, Set<AuthorDto> authorDtos) {
+    public BookCatalog(Long bookId, String title, Integer pages, Date year, Set<AuthorDto> authors,Boolean isAvailable) {
         this.bookId = bookId;
         this.title = title;
         this.pages = pages;
         this.year = year;
-        this.authorDtos = authorDtos;
+        this.authors = authors;
+        this.isAvailable = isAvailable;
     }
 
-    public BookCatalog(Long bookId, String title, Integer pages, Date year, Set<AuthorDto> authorDtos, Set<ReviewsDto> reviews) {
+    public BookCatalog(Long bookId, String title, Integer pages, Date year, Set<AuthorDto> authors, Set<ReviewsDto> reviews,Boolean isAvailable) {
         this.bookId = bookId;
         this.title = title;
         this.pages = pages;
         this.year = year;
-        this.authorDtos = authorDtos;
+        this.authors = authors;
         this.reviews = reviews;
+        this.isAvailable = isAvailable;
     }
 
 
@@ -66,12 +69,12 @@ public class BookCatalog extends RepresentationModel<BookCatalog> {
         this.year = year;
     }
 
-    public Set<AuthorDto> getAuthorDtos() {
-        return authorDtos;
+    public Set<AuthorDto> getAuthors() {
+        return authors;
     }
 
-    public void setAuthorDtos(Set<AuthorDto> authorDtos) {
-        this.authorDtos = authorDtos;
+    public void setAuthors(Set<AuthorDto> authors) {
+        this.authors = authors;
     }
 
     public Set<ReviewsDto> getReviews() {
@@ -80,5 +83,13 @@ public class BookCatalog extends RepresentationModel<BookCatalog> {
 
     public void setReviews(Set<ReviewsDto> reviews) {
         this.reviews = reviews;
+    }
+
+    public Boolean getAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(Boolean available) {
+        isAvailable = available;
     }
 }

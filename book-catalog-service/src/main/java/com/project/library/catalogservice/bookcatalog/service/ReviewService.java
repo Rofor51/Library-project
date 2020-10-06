@@ -13,6 +13,8 @@ public interface ReviewService {
     Set<ReviewsDto> getReviews(Long id);
 
 
-    ReviewsDto createReview(ReviewsDto reviewsDto);
+    void createReview(ReviewsDto reviewsDto);
+
+    void updateReview(ReviewsDto reviewsDto);
 
 }

@@ -22,13 +22,15 @@ public class BookServiceImp implements BookService {
 
     @Override
     @Logger
-    public Book createBook(String title, Integer pages, String year, Set<AuthorDto> authorId,Boolean isAvailable) {
-        return bookRepository.save(new Book(title, pages, year, getAndValidateAuthors(authorId),isAvailable));
+    public Book createBook(String title, Integer pages, Date year, Set<AuthorDto> authorId,Boolean isAvailable) {
+
+
+        return bookRepository.save(new Book(title, pages, year,isAvailable, getAndValidateAuthors(authorId)));
     }
 
     @Logger
     @Override
-    public Book updateBook(Long id, String title, Integer pages, String year, Set<AuthorDto> authorId,Boolean isAvailable) {
+    public Book updateBook(Long id, String title, Integer pages, Date year, Set<AuthorDto> authorId,Boolean isAvailable) {
         Optional<Book> book = lookUpBook(id);
         if (title != null) {
             book.get().setTitle(title);
@@ -45,7 +47,6 @@ public class BookServiceImp implements BookService {
         }
 
         if (isAvailable != null) {
-
             book.get().setAvailable(isAvailable);
         }
 
@@ -74,6 +75,7 @@ public class BookServiceImp implements BookService {
     private Book validate(Long id) {
         return bookRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Book was not found in database."));
     }
+
 
 
     private Author verifyAuthor(Long id) {

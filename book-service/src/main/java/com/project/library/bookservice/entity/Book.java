@@ -21,8 +21,10 @@ public class Book {
     @Column(name = "pages")
     private Integer pages;
     @Column(name = "year")
-    private String year;
-    private Boolean isAvailable;
+    private Date year;
+    @Column(name = "isavailable")
+    private Boolean available;
+
 
     @NotNull
     @ManyToMany(fetch = FetchType.LAZY)
@@ -32,20 +34,22 @@ public class Book {
             inverseJoinColumns = @JoinColumn(name = "author_id", nullable = false))
     private Set<Author> authors = new HashSet<>();
 
-    public Book(String title, Integer pages, String year, Set<Author> authors,Boolean isAvailable) {
+
+
+    public Book(String title, Integer pages, Date year,Boolean available, Set<Author> authors) {
         this.title = title;
         this.pages = pages;
         this.year = year;
         this.authors = authors;
-        this.isAvailable = isAvailable;
+        this.available = available;
     }
 
     public Boolean getAvailable() {
-        return isAvailable;
+        return available;
     }
 
     public void setAvailable(Boolean available) {
-        isAvailable = available;
+        available = available;
     }
 
     public Long getId() {
@@ -72,11 +76,11 @@ public class Book {
         this.pages = pages;
     }
 
-    public String getYear() {
+    public Date getYear() {
         return year;
     }
 
-    public void setYear(String year) {
+    public void setYear(Date year) {
         this.year = year;
     }
 

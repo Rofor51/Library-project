@@ -27,6 +27,13 @@ public class ReviewController {
         reviewClient.createReview(new ReviewsDto(bookDto.get().getBookId(), reviewDto.getUsername(), reviewDto.getComment(), reviewDto.getPoints(), reviewDto.getDate()));
     }
 
+    @PutMapping
+    @ResponseStatus(HttpStatus.OK)
+    public void updateReview(@RequestBody @Valid ReviewsDto reviewDto) {
+        Optional<BookDto> bookDto = bookClient.getBook(reviewDto.getBookId());
+        reviewClient.createReview(new ReviewsDto(reviewDto.getId(),bookDto.get().getBookId(), reviewDto.getUsername(), reviewDto.getComment(), reviewDto.getPoints(), reviewDto.getDate()));
+    }
+
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(FeignException.class)

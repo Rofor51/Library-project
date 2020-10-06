@@ -38,8 +38,8 @@ public class RestApi {
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    public ReviewDto updateReview(@RequestBody @Validated ReviewDto reviewDto) {
-        return convertToDto(reviewService.updateReview(reviewDto.getId(), reviewDto.getUsername(), reviewDto.getComment(), reviewDto.getPoints(), reviewDto.getDate()));
+    public void updateReview(@RequestBody @Validated ReviewDto reviewDto) {
+         convertToDto(reviewService.updateReview(reviewDto.getId(), reviewDto.getUsername(), reviewDto.getComment(), reviewDto.getPoints(), reviewDto.getDate()));
     }
 
 

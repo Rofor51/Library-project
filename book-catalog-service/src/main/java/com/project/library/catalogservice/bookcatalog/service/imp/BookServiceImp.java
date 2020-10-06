@@ -23,4 +23,14 @@ public class BookServiceImp implements BookService {
     public List<BookDto> getAllBooks() {
         return bookClient.getAllBooks();
     }
+
+    @Override
+    public void createBook(BookDto bookDto) {
+         bookClient.createBook(bookDto);
+    }
+
+    @Override
+    public void updateBook(BookDto bookDto) {
+        bookClient.updateBook(bookDto);
+    }
 }

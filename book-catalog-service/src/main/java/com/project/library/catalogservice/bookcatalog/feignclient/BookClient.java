@@ -4,9 +4,8 @@ package com.project.library.catalogservice.bookcatalog.feignclient;
 import com.project.library.catalogservice.bookcatalog.models.BookDto;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +20,12 @@ public interface BookClient {
     @GetMapping(value = "api/v1/books")
     @CircuitBreaker(name = "mainService", fallbackMethod = "fallBackMethod2")
     List<BookDto> getAllBooks();
+
+    @PostMapping(value = "api/v1/books")
+    void createBook(@RequestBody BookDto bookDto);
+
+    @PutMapping(value = "api/v1/books")
+    void updateBook(@RequestBody BookDto bookDto);
 
 
     default Optional<BookDto> fallBackMethod1(Throwable throwable) {

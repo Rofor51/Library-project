@@ -19,7 +19,12 @@ public class ReviewServiceImp implements ReviewService {
     }
 
     @Override
-    public ReviewsDto createReview(ReviewsDto reviewsDto) {
-        return reviewClient.createReview(reviewsDto);
+    public void createReview(ReviewsDto reviewsDto) {
+         reviewClient.createReview(reviewsDto);
+    }
+
+    @Override
+    public void updateReview(ReviewsDto reviewsDto) {
+        reviewClient.updateReview(reviewsDto);
     }
 }

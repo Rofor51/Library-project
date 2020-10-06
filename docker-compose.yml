@@ -1,0 +1,36 @@
+version: "3"
+services:
+  gateway:
+    image: gateway:latest
+    ports:
+      - "8762:8762"
+    networks:
+      - test
+    depends_on:
+      - eureka
+
+  eureka:
+    image: discovery:latest
+    ports:
+      - "8761:8761"
+    networks:
+      - test
+
+  post:
+    image: postsql:latest
+    ports:
+      - "5555:5555"
+    networks:
+      - test
+
+  book-service:
+    image: book-service
+    ports:
+      - "8989:8989"
+    networks:
+      - test
+    depends_on:
+      - post
+
+networks:
+  test:

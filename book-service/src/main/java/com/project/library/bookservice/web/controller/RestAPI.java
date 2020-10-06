@@ -28,15 +28,27 @@ public class RestAPI {
 
     @GetMapping("/{id}")
     public BookDto getBook(@PathVariable("id") Long id) {
+        System.out.println(convertToDto(bookService.lookUpBook(id).get()).getAvailable());
         return convertToDto(bookService.lookUpBook(id).get());
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createBook(@RequestBody BookDto bookDto) {
+        bookService.createBook(bookDto.getTitle(),bookDto.getPages(),bookDto.getYear(),bookDto.getAuthors(),bookDto.getAvailable());
+    }
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.OK)
+    public void updateBook(@RequestBody BookDto bookDto) {
+        bookService.updateBook(bookDto.getBookId(),bookDto.getTitle(),bookDto.getPages(),bookDto.getYear(),bookDto.getAuthors(),bookDto.getAvailable());
     }
 
 
     @GetMapping("/validate/{id}")
     public ResponseEntity<String> validateBook(@PathVariable("id") Long id) {
-
-        return ResponseEntity.status(HttpStatus.ACCEPTED)
-                .body("Book" + id + "has been validated.");
+        bookService.lookUpBook(id);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body("Book found");
     }
 
 
