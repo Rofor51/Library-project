@@ -28,20 +28,19 @@ public class RestAPI {
 
     @GetMapping("/{id}")
     public BookDto getBook(@PathVariable("id") Long id) {
-        System.out.println(convertToDto(bookService.lookUpBook(id).get()).getAvailable());
         return convertToDto(bookService.lookUpBook(id).get());
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void createBook(@RequestBody BookDto bookDto) {
-        bookService.createBook(bookDto.getTitle(),bookDto.getPages(),bookDto.getYear(),bookDto.getAuthors(),bookDto.getAvailable());
+        bookService.createBook(bookDto.getTitle(),bookDto.getPages(),bookDto.getYear(),bookDto.getAuthors(),bookDto.getImageLink(),bookDto.getInStore());
     }
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
     public void updateBook(@RequestBody BookDto bookDto) {
-        bookService.updateBook(bookDto.getBookId(),bookDto.getTitle(),bookDto.getPages(),bookDto.getYear(),bookDto.getAuthors(),bookDto.getAvailable());
+        bookService.updateBook(bookDto.getBookId(),bookDto.getTitle(),bookDto.getPages(),bookDto.getYear(),bookDto.getAuthors(),bookDto.getImageLink(),bookDto.getInStore());
     }
 
 

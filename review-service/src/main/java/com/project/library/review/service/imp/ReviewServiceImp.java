@@ -4,6 +4,8 @@ import com.project.library.review.entity.Review;
 import com.project.library.review.repo.ReviewRepository;
 import com.project.library.review.service.ReviewService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.OptionalDouble;
 
 @Service
 @RequiredArgsConstructor
@@ -19,13 +22,19 @@ public class ReviewServiceImp implements ReviewService {
 
 
     @Override
-    public List<Review> getAllReviews() {
-        return reviewRepository.findAll();
+    public Page<Review> getAllReviews(Pageable pageable) {
+        return reviewRepository.findAll(pageable);
     }
 
     @Override
-    public List<Review> getReviewsByBook(Long id) {
-        return Optional.of(reviewRepository.findByBookId(id)).orElseThrow(() -> new NoSuchElementException("Could not find review."));
+    public Page<Review> getReviewsByBook(Long id,Pageable pageable) {
+        return Optional.of(reviewRepository.findByBookId(id,pageable)).orElseThrow(() -> new NoSuchElementException("Could not find review."));
+    }
+
+    @Override
+    public Double getAverageScore(Long bookid) {
+        OptionalDouble av = reviewRepository.findByBookId(bookid).stream().mapToDouble((rating) -> rating.getPoints()).average();
+        return av.isPresent() ? av.getAsDouble(): null;
     }
 
     @Override

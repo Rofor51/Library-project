@@ -1,20 +1,15 @@
 package com.project.library.catalogservice.bookcatalog.service;
 
-import com.project.library.catalogservice.bookcatalog.models.ReviewsDto;
-import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import com.project.library.catalogservice.bookcatalog.models.Reviews;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.util.Set;
+import java.util.List;
+
 
 public interface ReviewService {
-    Set<ReviewsDto> getReviews(Long id);
+    List<Reviews> getReviews(Long bookId,Integer page);
 
-
-    void createReview(ReviewsDto reviewsDto);
-
-    void updateReview(ReviewsDto reviewsDto);
+    Double getAverageScore(Long bookId);
 
 }

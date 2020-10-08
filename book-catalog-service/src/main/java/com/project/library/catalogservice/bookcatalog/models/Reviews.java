@@ -2,27 +2,17 @@ package com.project.library.catalogservice.bookcatalog.models;
 
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
 @NoArgsConstructor
-public class ReviewsDto {
+public class Reviews {
 
     private String id;
-    @NotNull
     private Long bookId;
-    @NotNull
     private String username;
-    @Size(max = 255)
     private String comment;
-    @Max(5)
-    @Min(0)
     private Double points;
     private String date;
 
-    public ReviewsDto(String id, Long bookId, String username, String comment, Double points, String date) {
+    public Reviews(String id, Long bookId, String username, String comment, Double points, String date) {
         this.id = id;
         this.bookId = bookId;
         this.username = username;
@@ -31,7 +21,7 @@ public class ReviewsDto {
         this.date = date;
     }
 
-    public ReviewsDto(Long bookId, String username, String comment, Double points, String date) {
+    public Reviews(Long bookId, String username, String comment, Double points, String date) {
         this.bookId = bookId;
         this.username = username;
         this.comment = comment;

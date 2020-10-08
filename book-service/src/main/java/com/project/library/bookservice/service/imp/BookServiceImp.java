@@ -22,15 +22,15 @@ public class BookServiceImp implements BookService {
 
     @Override
     @Logger
-    public Book createBook(String title, Integer pages, Date year, Set<AuthorDto> authorId,Boolean isAvailable) {
+    public Book createBook(String title, Integer pages, Date year, Set<AuthorDto> authors, String imageLink,Boolean inStore) {
 
 
-        return bookRepository.save(new Book(title, pages, year,isAvailable, getAndValidateAuthors(authorId)));
+        return bookRepository.save(new Book(title, pages, year,imageLink,inStore, getAndValidateAuthors(authors)));
     }
 
     @Logger
     @Override
-    public Book updateBook(Long id, String title, Integer pages, Date year, Set<AuthorDto> authorId,Boolean isAvailable) {
+    public Book updateBook(Long id, String title, Integer pages, Date year,Set<AuthorDto> authors, String imageLink,Boolean inStore) {
         Optional<Book> book = lookUpBook(id);
         if (title != null) {
             book.get().setTitle(title);
@@ -41,15 +41,18 @@ public class BookServiceImp implements BookService {
         if (year != null) {
             book.get().setYear(year);
         }
-        if (authorId != null) {
+        if (authors != null) {
 
-            book.get().setAuthors(getAndValidateAuthors(authorId));
+            book.get().setAuthors(getAndValidateAuthors(authors));
         }
 
-        if (isAvailable != null) {
-            book.get().setAvailable(isAvailable);
+        if (imageLink != null) {
+            book.get().setImageLink(imageLink);
         }
 
+        if (inStore != null) {
+            book.get().setInStore(inStore);
+        }
         return bookRepository.save(book.get());
     }
 

@@ -3,11 +3,11 @@ package com.project.library.catalogservice.bookcatalog.models;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-public class AuthorDto {
+public class Author {
     private Long id;
     private String name;
 
-    public AuthorDto(Long id, String name) {
+    public Author(Long id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -28,11 +28,5 @@ public class AuthorDto {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return "AuthorDto{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
-    }
+
 }

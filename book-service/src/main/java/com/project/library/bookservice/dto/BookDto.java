@@ -12,23 +12,47 @@ public class BookDto {
     private Integer pages;
     private Date year;
     private Set<AuthorDto> authors;
-    private Boolean available;
 
-    public BookDto(String title, Integer pages, Date year,Boolean available, Set<AuthorDto> authors) {
+
+    private String imageLink;
+
+    private Boolean inStore;
+
+    public BookDto(String title, Integer pages, Date year, Set<AuthorDto> authors, String imageLink, Boolean inStore) {
         this.title = title;
         this.pages = pages;
         this.year = year;
         this.authors = authors;
-        this.available = available;
+        this.imageLink = imageLink;
+        this.inStore = inStore;
+
     }
 
-    public BookDto(Long bookId, String title, Integer pages, Date year,Boolean available, Set<AuthorDto> authors) {
+    public BookDto(Long bookId, String title, Integer pages, Date year, Set<AuthorDto> authors, String imageLink, Boolean inStore) {
         this.title = title;
         this.pages = pages;
         this.year = year;
         this.authors = authors;
         this.bookId = bookId;
-        this.available = available;
+        this.imageLink = imageLink;
+        this.inStore = inStore;
+
+    }
+
+    public Boolean getInStore() {
+        return inStore;
+    }
+
+    public void setInStore(Boolean inStore) {
+        this.inStore = inStore;
+    }
+
+    public String getImageLink() {
+        return imageLink;
+    }
+
+    public void setImageLink(String imageLink) {
+        this.imageLink = imageLink;
     }
 
     public Long getBookId() {
@@ -71,11 +95,5 @@ public class BookDto {
         this.year = year;
     }
 
-    public Boolean getAvailable() {
-        return available;
-    }
 
-    public void setAvailable(Boolean available) {
-        this.available = available;
-    }
 }

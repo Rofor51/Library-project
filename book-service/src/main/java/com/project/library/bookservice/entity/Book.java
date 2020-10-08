@@ -22,9 +22,10 @@ public class Book {
     private Integer pages;
     @Column(name = "year")
     private Date year;
-    @Column(name = "isavailable")
-    private Boolean available;
-
+    @Column(name = "image_link")
+    private String imageLink;
+    @Column(name = "instore")
+    private Boolean inStore;
 
     @NotNull
     @ManyToMany(fetch = FetchType.LAZY)
@@ -35,21 +36,39 @@ public class Book {
     private Set<Author> authors = new HashSet<>();
 
 
+    public String getImageLink() {
+        return imageLink;
+    }
 
-    public Book(String title, Integer pages, Date year,Boolean available, Set<Author> authors) {
+    public void setImageLink(String imageLink) {
+        this.imageLink = imageLink;
+    }
+
+    public Book(String title, Integer pages, Date year, String imageLink, Boolean inStore, Set<Author> authors) {
         this.title = title;
         this.pages = pages;
         this.year = year;
         this.authors = authors;
-        this.available = available;
+        this.imageLink = imageLink;
+        this.inStore = inStore;
+    }
+    public Book(Long id, String title, Integer pages, Date year, String imageLink, Boolean inStore, Set<Author> authors) {
+        this.id = id;
+        this.title = title;
+        this.pages = pages;
+        this.year = year;
+        this.authors = authors;
+        this.imageLink = imageLink;
+        this.inStore = inStore;
     }
 
-    public Boolean getAvailable() {
-        return available;
+
+    public Boolean getInStore() {
+        return inStore;
     }
 
-    public void setAvailable(Boolean available) {
-        available = available;
+    public void setInStore(Boolean test) {
+        this.inStore = test;
     }
 
     public Long getId() {
@@ -91,4 +110,6 @@ public class Book {
     public void setAuthors(Set<Author> authors) {
         this.authors = authors;
     }
+
+
 }

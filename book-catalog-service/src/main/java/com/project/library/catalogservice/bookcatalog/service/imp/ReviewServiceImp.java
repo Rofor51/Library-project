@@ -1,12 +1,16 @@
 package com.project.library.catalogservice.bookcatalog.service.imp;
 
 import com.project.library.catalogservice.bookcatalog.feignclient.ReviewClient;
-import com.project.library.catalogservice.bookcatalog.models.ReviewsDto;
+import com.project.library.catalogservice.bookcatalog.models.Reviews;
 import com.project.library.catalogservice.bookcatalog.service.ReviewService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
+import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
@@ -14,17 +18,14 @@ public class ReviewServiceImp implements ReviewService {
     private final ReviewClient reviewClient;
 
     @Override
-    public Set<ReviewsDto> getReviews(Long id) {
-        return reviewClient.getReviews(id);
+    public List<Reviews> getReviews(Long bookid,Integer page) {
+        return reviewClient.getReviews(bookid,page);
     }
 
     @Override
-    public void createReview(ReviewsDto reviewsDto) {
-         reviewClient.createReview(reviewsDto);
+    public Double getAverageScore(Long bookid) {
+        return reviewClient.getAverageScore(bookid);
     }
 
-    @Override
-    public void updateReview(ReviewsDto reviewsDto) {
-        reviewClient.updateReview(reviewsDto);
-    }
+
 }

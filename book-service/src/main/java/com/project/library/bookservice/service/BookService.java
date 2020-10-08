@@ -10,10 +10,10 @@ import java.util.Set;
 
 public interface BookService {
 
-    Book createBook(String title, Integer pages, Date year, Set<AuthorDto> authorId,Boolean isAvailable);
+    Book createBook(String title, Integer pages, Date year, Set<AuthorDto> authors, String imageLink,Boolean inStore);
 
 
-    Book updateBook(Long id, String title, Integer pages, Date year, Set<AuthorDto> authorId,Boolean isAvailable);
+    Book updateBook(Long id, String title, Integer pages, Date year,Set<AuthorDto> authors, String imageLink,Boolean inStore);
 
     List<Book> lookUpAllBooks();
 

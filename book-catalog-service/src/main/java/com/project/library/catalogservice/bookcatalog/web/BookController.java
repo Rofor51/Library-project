@@ -2,11 +2,12 @@ package com.project.library.catalogservice.bookcatalog.web;
 
 import com.project.library.catalogservice.bookcatalog.assembler.BookCatalogAssembler;
 import com.project.library.catalogservice.bookcatalog.models.BookCatalog;
-import com.project.library.catalogservice.bookcatalog.models.BookDto;
+import com.project.library.catalogservice.bookcatalog.models.BookDetail;
 import com.project.library.catalogservice.bookcatalog.service.BookService;
 import com.project.library.catalogservice.bookcatalog.service.ReviewService;
 import feign.FeignException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,36 +24,19 @@ public class BookController {
     private final BookService bookService;
 
     @GetMapping("/{id}")
-    public BookCatalog getBook(@PathVariable("id") Long bookId) {
-        Optional<BookDto> bookDto = bookService.getBook(bookId);
-        System.out.println(bookDto.get().getAvailable());
-        final BookCatalog bookCatalog = assembler.toModel(bookDto.get());
-        bookCatalog.setReviews(reviewService.getReviews(bookDto.get().getBookId()));
-        return bookCatalog;
+    public BookDetail getBookWithReviews(@PathVariable("id") Long id,@RequestParam(defaultValue = "0") Integer page) {
+        Optional<BookDetail> bookDto = bookService.getBook(id);
+        bookDto.get().setReviews(reviewService.getReviews(bookDto.get().getBookId(),page));
+        return bookDto.get();
 
     }
 
-    @GetMapping
-    public List<BookCatalog> getAllBooks() {
-        List<BookDto> bookDto = bookService.getAllBooks();
-        List<BookCatalog> bookCatalog = bookDto.stream().map(k -> assembler.toModel(k)).collect(Collectors.toList());
-        bookCatalog.forEach(x -> x.setReviews(reviewService.getReviews(x.getBookId())));
-        return bookCatalog;
+    @GetMapping("/all")
+    public List<BookCatalog> getAllBooksWithAverageScore() {
+     List<BookCatalog> bookCatalog = bookService.getAllBooks().stream().map(x -> assembler.process(x)).collect(Collectors.toList());
+     bookCatalog.forEach(k -> k.setAverageScore(reviewService.getAverageScore(k.getBookId())));
+     return bookCatalog;
 
-    }
-
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public void createBook(@RequestBody BookDto bookDto) {
-        System.out.println("YTO" + bookDto.getAvailable());
-        bookService.createBook(bookDto);
-    }
-
-    @PutMapping
-    @ResponseStatus(HttpStatus.OK)
-    public void updateBook(@RequestBody BookDto bookDto) {
-        System.out.println("YTO" + bookDto.getAvailable());
-        bookService.updateBook(bookDto);
     }
 
 

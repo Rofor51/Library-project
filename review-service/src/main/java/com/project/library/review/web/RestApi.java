@@ -5,6 +5,9 @@ import com.project.library.review.entity.ReviewDto;
 import com.project.library.review.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -21,13 +24,17 @@ public class RestApi {
     private final ReviewService reviewService;
 
     @GetMapping
-    public List<ReviewDto> getAllReviews() {
-        return reviewService.getAllReviews().stream().map(this::convertToDto).collect(Collectors.toList());
+    public List<ReviewDto> getAllReviews(Pageable pageable) {
+        Page<Review> reviews = reviewService.getAllReviews(pageable);
+        List<ReviewDto> reviewDtos = reviews.getContent().stream().map(this::convertToDto).collect(Collectors.toList());
+        return reviewDtos;
     }
 
     @GetMapping("/{id}")
-    public List<ReviewDto> getReviewsByBookId(@PathVariable("id") Long id) {
-        return reviewService.getReviewsByBook(id).stream().map(this::convertToDto).collect(Collectors.toList());
+    public List<ReviewDto> getReviewsByBookId(@PathVariable("id") Long id,Pageable pageable) {
+        Page<Review> reviews = reviewService.getReviewsByBook(id,pageable);
+        List<ReviewDto> reviewDtos = reviews.getContent().stream().map(this::convertToDto).collect(Collectors.toList());
+        return reviewDtos;
     }
 
     @PostMapping
@@ -40,6 +47,12 @@ public class RestApi {
     @ResponseStatus(HttpStatus.OK)
     public void updateReview(@RequestBody @Validated ReviewDto reviewDto) {
          convertToDto(reviewService.updateReview(reviewDto.getId(), reviewDto.getUsername(), reviewDto.getComment(), reviewDto.getPoints(), reviewDto.getDate()));
+    }
+
+    @GetMapping("average/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Double getAverageScoreForBook(@PathVariable("id") Long bookId) {
+       return reviewService.getAverageScore(bookId);
     }
 
 

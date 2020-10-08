@@ -1,17 +1,15 @@
 package com.project.library.catalogservice.bookcatalog.service;
 
-import com.project.library.catalogservice.bookcatalog.models.BookDto;
-import org.springframework.web.bind.annotation.PathVariable;
+import com.project.library.catalogservice.bookcatalog.models.BookCatalog;
+import com.project.library.catalogservice.bookcatalog.models.BookDetail;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface BookService {
-    Optional<BookDto> getBook(Long id);
+    Optional<BookDetail> getBook(Long id);
 
-    List<BookDto> getAllBooks();
+    List<BookCatalog> getAllBooks();
 
-    void createBook(BookDto bookDto);
 
-    void updateBook(BookDto bookDto);
 }
