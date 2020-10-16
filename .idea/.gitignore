@@ -9,6 +9,7 @@
 
 # dependencies
 /node_modules
+my-app/node_modules
 library-react/node_modules
 library-react/my-app/node_modules
 /.pnp
@@ -18,6 +19,8 @@ library-react/my-app/node_modules
 /coverage
 
 # production
+/build
+my-app/build
 library-react/my-app/build
 
 # misc
