@@ -6,10 +6,20 @@ import lombok.NoArgsConstructor;
 public class Author {
     private Long id;
     private String name;
+    private String lastName;
 
-    public Author(Long id, String name) {
+    public Author(Long id, String name,String lastName) {
         this.id = id;
         this.name = name;
+        this.lastName = lastName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public Long getId() {

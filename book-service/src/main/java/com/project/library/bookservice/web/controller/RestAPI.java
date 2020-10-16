@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -44,9 +45,9 @@ public class RestAPI {
     }
 
 
-    @GetMapping("/validate/{id}")
-    public ResponseEntity<String> validateBook(@PathVariable("id") Long id) {
-        bookService.lookUpBook(id);
+    @PostMapping("/validate/id")
+    public ResponseEntity<String> validateBooks(@RequestBody Long [] id) {
+        Arrays.stream(id).forEach(t -> bookService.lookUpBook(t));
         return ResponseEntity.status(HttpStatus.ACCEPTED).body("Book found");
     }
 

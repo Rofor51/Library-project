@@ -23,8 +23,6 @@ public class BookServiceImp implements BookService {
     @Override
     @Logger
     public Book createBook(String title, Integer pages, Date year, Set<AuthorDto> authors, String imageLink,Boolean inStore) {
-
-
         return bookRepository.save(new Book(title, pages, year,imageLink,inStore, getAndValidateAuthors(authors)));
     }
 
@@ -68,24 +66,17 @@ public class BookServiceImp implements BookService {
         return Optional.of(validate(id));
     }
 
-    @Logger
-    @Override
-    public List<Book> getBooksByAuthor(Long id) {
-        return bookRepository.findAllByAuthorsName(verifyAuthor(id).getName());
-    }
 
 
     private Book validate(Long id) {
         return bookRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Book was not found in database."));
     }
 
-
-
-    private Author verifyAuthor(Long id) {
-        return authorRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Author was not found in database."));
+    private Author verifyAuthor(String name,String lastName) {
+        return authorRepository.findByNameIgnoreCaseAndLastNameIgnoreCase(name,lastName).orElse(authorRepository.save(new Author(name,lastName,null)));
     }
 
     private Set<Author> getAndValidateAuthors(Set<AuthorDto> authorIds) {
-        return authorIds.stream().map(k -> verifyAuthor(k.getId())).collect(Collectors.toSet());
+        return authorIds.stream().map(k -> verifyAuthor(k.getName(),k.getLastName())).collect(Collectors.toSet());
     }
 }

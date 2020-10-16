@@ -1,0 +1,68 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    margin-right: 122px;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 19px;
+    margin-left: 122px;
+    display: flex;
+  }
+
+  .left-column img {
+    max-width: 300px;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+  .right-column {
+    width: 35%;
+    margin-top: 10px;
+    margin-left: 45px;
+    top: 25px;
+  }
+   .bookDetailsNew__authorsList {
+    margin-left: 11px;
+    margin-bottom: 10px;
+}
+  .product-description {
+    border-bottom: 1px solid #E1E8EE;
+    margin-bottom: 20px;
+  }
+  .left-column button{
+    border: none;
+    outline: none;
+    background: #333;
+    color: white;
+    width: 100%;
+    height: 40px;
+    display: block;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 10px 0;
+}
+
+  .rating {
+    margin-left: 10px;
+    
+ }
+  
+  .product-description h1 {
+    font-weight: 300;
+    font-size: 52px;
+    color: #43484D;
+    letter-spacing: -2px;
+  }
+  .product-description p {
+    font-size: 16px;
+    font-weight: 300;
+    color: #86939E;
+    line-height: 24px;
+  }

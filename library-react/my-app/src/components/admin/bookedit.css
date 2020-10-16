@@ -1,0 +1,21 @@
+.container, .container-fluid {
+    margin-top: 20px;
+  }  
+
+  .mr10 {
+    position: relative;
+    top: 30px;
+  }
+
+  .img-link {
+    position: relative;
+    top: 30px;
+  }
+
+  .book-header {
+    position: relative;
+    margin-top: 20px;
+    right: 100px;
+  }
+
+  

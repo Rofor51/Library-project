@@ -95,5 +95,16 @@ public class BookDto {
         this.year = year;
     }
 
-
+    @Override
+    public String toString() {
+        return "BookDto{" +
+                "bookId=" + bookId +
+                ", title='" + title + '\'' +
+                ", pages=" + pages +
+                ", year=" + year +
+                ", authors=" + authors +
+                ", imageLink='" + imageLink + '\'' +
+                ", inStore=" + inStore +
+                '}';
+    }
 }

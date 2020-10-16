@@ -16,8 +16,14 @@ public class OrderController {
 
     @PostMapping
     public ResponseEntity<String> createOrder(@RequestBody Order order) {
+        System.out.println(order);
         return orderService.createOrder(order);
+    }
 
+    @GetMapping
+    public ResponseEntity<String> getOrders(@RequestBody Order order) {
+        System.out.println(order);
+        return orderService.createOrder(order);
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)

@@ -19,7 +19,7 @@ public interface BookService {
 
     Optional<Book> lookUpBook(Long id);
 
-    List<Book> getBooksByAuthor(Long id);
+
 
 
 }

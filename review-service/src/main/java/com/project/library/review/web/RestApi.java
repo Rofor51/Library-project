@@ -63,6 +63,13 @@ public class RestApi {
 
     }
 
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(Exception.class)
+    private String return400(Exception ex) {
+        return ex.getMessage();
+
+    }
+
     private ReviewDto convertToDto(Review review) {
         ReviewDto bookDto = modelMapper.map(review, ReviewDto.class);
         return bookDto;

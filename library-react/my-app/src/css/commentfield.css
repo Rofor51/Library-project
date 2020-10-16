@@ -1,0 +1,11 @@
+.commentForm{
+    position: relative;
+    top: 660px;
+    min-width: 10px;
+    min-height: 20px;
+    overflow: hidden;
+    padding: 10px;
+    margin: 10px;
+    transition: 0.5s linear;
+    height: 60px;
+}

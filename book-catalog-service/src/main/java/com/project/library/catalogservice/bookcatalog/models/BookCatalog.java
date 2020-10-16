@@ -1,6 +1,7 @@
 package com.project.library.catalogservice.bookcatalog.models;
 
 import lombok.NoArgsConstructor;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.hateoas.RepresentationModel;
 
 @NoArgsConstructor
