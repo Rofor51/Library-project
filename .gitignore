@@ -10,6 +10,8 @@
 # dependencies
 /node_modules
 library-react/node_modules
+library-react/.vscode
+library-react/my-app/node_modules
 /.pnp
 .pnp.js
 
