@@ -8,8 +8,9 @@
 /httpRequests/
 
 # dependencies
+/library-react/node_modules
+/library-react/.vscode
 /node_modules
-**/node_modules
 /.pnp
 .pnp.js
 
@@ -19,6 +20,8 @@
 # production
 /build
 my-app/build
+/node_modules
+library-react/node_modules
 library-react/my-app/build
 
 # misc
