@@ -4,10 +4,10 @@ A project for fun. Purpose to get familiar with different tools. Library project
 System architectrure
 
 TODO
-- Add authorization server
+- Add authorization server (DONE)
 - Finish frontend (REACT JS)
-- Add security, JWT validation
-- finish order services
+- Add security, JWT validation ()
+- finish order services ()
 - Dockerize
 
 ![alt text](https://github.com/Rofor51/Library-project/blob/master/dig.png)
