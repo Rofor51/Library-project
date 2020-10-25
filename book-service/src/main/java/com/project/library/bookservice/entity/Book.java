@@ -20,9 +20,9 @@ public class Book {
     private String title;
     @Column(name = "pages")
     private Integer pages;
-    @Column(name = "year")
+    @Column(name = "date")
     private Date year;
-    @Column(name = "image_link")
+    @Column(name = "imagelink")
     private String imageLink;
     @Column(name = "instore")
     private Boolean inStore;

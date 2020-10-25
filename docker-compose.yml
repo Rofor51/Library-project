@@ -1,7 +1,7 @@
 version: "3"
 services:
   gateway:
-    image: gateway:latest
+    image: gateway
     ports:
       - "8762:8762"
     networks:
@@ -10,16 +10,25 @@ services:
       - eureka
 
   eureka:
-    image: discovery:latest
+    image: eureka-server
     ports:
       - "8761:8761"
     networks:
       - test
 
-  post:
-    image: postsql:latest
+  book-catalog:
+    image: book-catalog
     ports:
-      - "5555:5555"
+      - "8686:8686"
+    networks:
+      - test
+
+  postsql:
+    image: postgres:alpine
+    ports:
+      - "5432:5555"
+    environment:
+      - POSTGRES_PASSWORD=password
     networks:
       - test
 
@@ -30,7 +39,42 @@ services:
     networks:
       - test
     depends_on:
-      - post
+      - postsql
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - test
+      
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    ports:
+      - "9092:9092"
+      - "29092:29092"
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false"
+    networks:
+      - test
+
+  order-service:
+    image: order-service
+    ports:
+      - "8786:8786"
+    networks:
+      - test
+    depends_on:
+      - zookeeper
+      - kafka
 
 networks:
   test:

@@ -26,33 +26,6 @@ public class BookServiceImp implements BookService {
         return bookRepository.save(new Book(title, pages, year,imageLink,inStore, getAndValidateAuthors(authors)));
     }
 
-    @Logger
-    @Override
-    public Book updateBook(Long id, String title, Integer pages, Date year,Set<AuthorDto> authors, String imageLink,Boolean inStore) {
-        Optional<Book> book = lookUpBook(id);
-        if (title != null) {
-            book.get().setTitle(title);
-        }
-        if (pages != null) {
-            book.get().setPages(pages);
-        }
-        if (year != null) {
-            book.get().setYear(year);
-        }
-        if (authors != null) {
-
-            book.get().setAuthors(getAndValidateAuthors(authors));
-        }
-
-        if (imageLink != null) {
-            book.get().setImageLink(imageLink);
-        }
-
-        if (inStore != null) {
-            book.get().setInStore(inStore);
-        }
-        return bookRepository.save(book.get());
-    }
 
     @Logger
     @Override
@@ -66,14 +39,15 @@ public class BookServiceImp implements BookService {
         return Optional.of(validate(id));
     }
 
-
-
     private Book validate(Long id) {
         return bookRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Book was not found in database."));
     }
 
     private Author verifyAuthor(String name,String lastName) {
-        return authorRepository.findByNameIgnoreCaseAndLastNameIgnoreCase(name,lastName).orElse(authorRepository.save(new Author(name,lastName,null)));
+        if(authorRepository.findByNameIgnoreCaseAndLastNameIgnoreCase(name,lastName).isPresent()) {
+            return authorRepository.findByNameIgnoreCaseAndLastNameIgnoreCase(name,lastName).get();
+        }
+        return authorRepository.save(new Author(name,lastName));
     }
 
     private Set<Author> getAndValidateAuthors(Set<AuthorDto> authorIds) {

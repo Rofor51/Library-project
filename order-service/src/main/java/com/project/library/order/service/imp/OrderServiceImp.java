@@ -18,6 +18,7 @@ public class OrderServiceImp implements OrderService {
     private final KafkaTemplate<String, Order> kafkaTemplate;
 
 
+
     @Override
     public ResponseEntity<String> createOrder(Order order) {
         if(bookClient.validateBook(order.getBookId()).getStatusCode() == HttpStatus.ACCEPTED) {

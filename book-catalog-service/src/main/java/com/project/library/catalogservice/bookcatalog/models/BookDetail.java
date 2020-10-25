@@ -103,4 +103,18 @@ public class BookDetail extends RepresentationModel<BookDetail> {
     public void setAvailable(Boolean available) {
         isAvailable = available;
     }
+
+    @Override
+    public String toString() {
+        return "BookDetail{" +
+                "bookId=" + bookId +
+                ", title='" + title + '\'' +
+                ", pages=" + pages +
+                ", year=" + year +
+                ", isAvailable=" + isAvailable +
+                ", authors=" + authors +
+                ", reviews=" + reviews +
+                ", imageLink='" + imageLink + '\'' +
+                '}';
+    }
 }

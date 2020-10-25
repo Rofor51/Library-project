@@ -5,26 +5,27 @@ import com.project.library.order.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/v1/validate")
+@RequestMapping("api/v1/order-service")
 public class OrderController {
     private final OrderService orderService;
 
 
     @PostMapping
     public ResponseEntity<String> createOrder(@RequestBody Order order) {
-        System.out.println(order);
         return orderService.createOrder(order);
     }
 
     @GetMapping
+    @PreAuthorize("hasAuthority('Admin')")
     public ResponseEntity<String> getOrders(@RequestBody Order order) {
-        System.out.println(order);
         return orderService.createOrder(order);
     }
+
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)

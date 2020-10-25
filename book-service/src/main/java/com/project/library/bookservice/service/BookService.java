@@ -13,8 +13,6 @@ public interface BookService {
     Book createBook(String title, Integer pages, Date year, Set<AuthorDto> authors, String imageLink,Boolean inStore);
 
 
-    Book updateBook(Long id, String title, Integer pages, Date year,Set<AuthorDto> authors, String imageLink,Boolean inStore);
-
     List<Book> lookUpAllBooks();
 
     Optional<Book> lookUpBook(Long id);

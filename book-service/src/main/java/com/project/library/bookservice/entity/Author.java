@@ -19,18 +19,17 @@ public class Author {
     private String name;
     @Column(name = "last_name", nullable = false)
     private String lastName;
-    @Column(name = "birth", nullable = false)
-    private Date birth;
+
 
 
     @ManyToMany(mappedBy = "authors", fetch = FetchType.LAZY)
     private Set<Book> books = new HashSet<>();
 
 
-    public Author(String name, String lastName, Date birth) {
+    public Author(String name, String lastName) {
         this.name = name;
         this.lastName = lastName;
-        this.birth = birth;
+
     }
 
     public Long getId() {
@@ -57,13 +56,6 @@ public class Author {
         this.lastName = lastName;
     }
 
-    public Date getBirth() {
-        return birth;
-    }
-
-    public void setBirth(Date birth) {
-        this.birth = birth;
-    }
 
     public Set<Book> getBooks() {
         return books;
@@ -71,5 +63,15 @@ public class Author {
 
     public void setBooks(Set<Book> books) {
         this.books = books;
+    }
+
+    @Override
+    public String toString() {
+        return "Author{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", books=" + books +
+                '}';
     }
 }

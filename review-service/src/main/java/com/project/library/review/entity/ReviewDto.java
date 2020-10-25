@@ -2,10 +2,13 @@ package com.project.library.review.entity;
 
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
+
 @NoArgsConstructor
 public class ReviewDto {
 
     private String id;
+    @NotNull
     private Long bookId;
     private String username;
     private String comment;

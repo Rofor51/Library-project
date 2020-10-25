@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -15,12 +16,17 @@ import java.util.Set;
 @FeignClient("REVIEWER-SERVICE")
 public interface ReviewClient {
     @GetMapping("/api/v1/reviews/{id}?page={page}")
+    @CircuitBreaker(name = "mainService", fallbackMethod = "fallBackMethod1")
     List<Reviews> getReviews(@PathVariable("id") Long id,@PathVariable("page") Integer page);
 
     @GetMapping("/api/v1/reviews/average/{id}")
+    @CircuitBreaker(name = "mainService", fallbackMethod = "fallBackMethod2")
     Double getAverageScore(@PathVariable("id") Long bookId);
 
-    default List<Reviews> fallBackMethod1(Throwable throwable) {
+    default List<Reviews> fallBackMethod1(@PathVariable("id") Long id,@PathVariable("page") Integer page,Throwable throwable) {
+        return new ArrayList<>();
+    }
+    default Double fallBackMethod2(Throwable throwable) {
         return null;
     }
 

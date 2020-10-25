@@ -48,4 +48,11 @@ public class BookController {
         return ex.getMessage();
 
     }
+
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(Exception.class)
+    private String return400(Exception ex) {
+        return ex.getMessage();
+
+    }
 }
