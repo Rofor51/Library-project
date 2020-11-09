@@ -6,8 +6,8 @@ System architectrure
 TODO
 - Add authorization server (DONE)
 - Finish frontend (REACT JS)
-- Add security, JWT validation ()
-- finish order services ()
-- Dockerize
+- Add security, JWT validation (DONE)
+- finish order services (DONE)
+- Dockerize (DONE)
 
 ![alt text](https://github.com/Rofor51/Library-project/blob/master/dig.png)
