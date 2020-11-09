@@ -1,8 +1,10 @@
 package com.project.library.catalogservice.bookcatalog.models;
 
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
+@Setter
 public class Author {
     private Long id;
     private String name;
@@ -38,5 +40,12 @@ public class Author {
         this.name = name;
     }
 
-
+    @Override
+    public String toString() {
+        return "Author{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
+    }
 }

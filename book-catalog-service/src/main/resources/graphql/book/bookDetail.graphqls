@@ -1,0 +1,12 @@
+#! indicates its a non nullable value
+type BookDetail {
+    bookId: Int
+    pages: Int
+    year: String
+    authors:[Author]
+    isAvailable: Boolean
+    imageLink: String
+
+}
+
+

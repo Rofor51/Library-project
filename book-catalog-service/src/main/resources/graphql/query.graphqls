@@ -1,0 +1,5 @@
+type Query {
+    bookCatalog: [BookCatalog]
+    bookDetail(bookId:Int): BookDetail
+    reviews(bookId:Int,page:Int): [Reviews]
+}

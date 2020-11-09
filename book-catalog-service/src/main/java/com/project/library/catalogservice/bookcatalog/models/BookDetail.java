@@ -16,8 +16,9 @@ public class BookDetail extends RepresentationModel<BookDetail> {
     private Date year;
     private Boolean isAvailable;
     private Set<Author> authors;
-    private List<Reviews> reviews;
     private String imageLink;
+
+
 
     public BookDetail(Long bookId, String title, Integer pages, Date year, Set<Author> authors, Boolean isAvailable, String imageLink) {
         this.bookId = bookId;
@@ -29,16 +30,6 @@ public class BookDetail extends RepresentationModel<BookDetail> {
         this.imageLink = imageLink;
     }
 
-    public BookDetail(Long bookId, String title, Integer pages, Date year, Set<Author> authors, List<Reviews> reviews, Boolean isAvailable, String imageLink) {
-        this.bookId = bookId;
-        this.title = title;
-        this.pages = pages;
-        this.year = year;
-        this.authors = authors;
-        this.reviews = reviews;
-        this.isAvailable = isAvailable;
-        this.imageLink = imageLink;
-    }
 
     public String getImageLink() {
         return imageLink;
@@ -88,14 +79,6 @@ public class BookDetail extends RepresentationModel<BookDetail> {
         this.authors = authors;
     }
 
-    public List<Reviews> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(List<Reviews> reviews) {
-        this.reviews = reviews;
-    }
-
     public Boolean getAvailable() {
         return isAvailable;
     }
@@ -113,7 +96,6 @@ public class BookDetail extends RepresentationModel<BookDetail> {
                 ", year=" + year +
                 ", isAvailable=" + isAvailable +
                 ", authors=" + authors +
-                ", reviews=" + reviews +
                 ", imageLink='" + imageLink + '\'' +
                 '}';
     }

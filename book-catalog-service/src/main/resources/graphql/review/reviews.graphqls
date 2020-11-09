@@ -1,0 +1,8 @@
+type Reviews {
+    id: String
+    bookId: Int
+    username: String
+    comment:String
+    points:Float
+    date:String
+}
