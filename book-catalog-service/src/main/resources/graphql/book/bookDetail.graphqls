@@ -1,6 +1,7 @@
 #! indicates its a non nullable value
 type BookDetail {
     bookId: Int
+    title: String
     pages: Int
     year: String
     authors:[Author]

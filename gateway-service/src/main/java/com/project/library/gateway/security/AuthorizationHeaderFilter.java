@@ -4,7 +4,6 @@ import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
 import org.springframework.core.Ordered;
-import java.util.Optional;
 
 import static org.springframework.cloud.netflix.zuul.filters.support.FilterConstants.PRE_TYPE;
 
@@ -40,9 +39,6 @@ public class AuthorizationHeaderFilter extends ZuulFilter {
         return null;
     }
 
-    private Optional<String> getAuthorizationHeader() {
-        return null;
-    }
 
 
 }

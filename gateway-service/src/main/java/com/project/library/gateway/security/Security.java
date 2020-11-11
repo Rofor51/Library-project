@@ -20,11 +20,10 @@ public class Security extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.cors().and().csrf().disable();
         http
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET,"/review/api/v1/reviews/**").permitAll()
-                .antMatchers(HttpMethod.GET,"/book/api/v1/reviews/**").permitAll()
-                .antMatchers(HttpMethod.GET,"/catalog/api/v1/books/**").permitAll()
+                .antMatchers("/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .oauth2ResourceServer().jwt();
@@ -39,7 +38,7 @@ public class Security extends WebSecurityConfigurerAdapter {
     }
 
 
-
+/*
     @Bean
     public RequestCache refererRequestCache() {
         return new HttpSessionRequestCache() {
@@ -54,4 +53,6 @@ public class Security extends WebSecurityConfigurerAdapter {
         };
 
     }
+
+ */
 }
