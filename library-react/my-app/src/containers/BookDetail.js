@@ -1,48 +1,47 @@
-import React, {npm,  Component } from 'react';
+import React from 'react';
 import CommentBox from '../components/CommentBox';
 import '../css/bookdetail.css'
 import Review from '../components/Review';
 import { connect } from 'react-redux'
 import { addBasket } from '../actions/addAction'
+import { gql, useQuery } from '@apollo/client';
 
-
-class BookDetails extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {data: [], isLoading: true, current: 0,complete: false,userInfo: null };   
-        
+const GET_BOOK_DETAIL = gql`
+query GetBookDetail($bookId: Int!) {
+  bookDetail(bookId: $bookId) {
+    bookId
+    title
+    imageLink  
+    authors {
+      id
+      name
     }
-    componentDidMount() {
-        this.setState({isLoading: true});
+  }
+}
+`;
 
-        try {
-            fetch(`/catalog/api/v1/books/${this.props.match.params.id}`)
-            .then(response => response.json())
-            .then(dataSet => this.setState({data: dataSet, isLoading: false}))
-            .catch(() => this.props.history.push('/')); 
-          } catch (error) {
-            this.props.history.push('/');
-          }
-      }
 
-    render () {
-    const {data,isLoading} = this.state;
-    if(isLoading) {
-      return <p>Loading.....</p>
-     
-    }
+const BookDetails = (props) => {
+  const bookId = props.match.params.id;
+  const { loading, error, data } = useQuery(GET_BOOK_DETAIL,{
+    variables: { bookId },
+  });
+
   
+  if (loading) return 'Loading...';
+  if (error) return `Error! ${error.message}`;
+
         return (
             <div>
-              <Review/>
+              <Review bookId={data.bookDetail.bookId}/>
                 <div className="container">
                <div className="left-column">
-               <img src={data.imageLink}></img>
-               <button onClick={() => this.props.addBasket({'id':data.bookId, 'name':data.title,'img':data.imageLink})}>Borrow</button>
+               <img src={data.bookDetail.imageLink}></img>
+               <button onClick={() => props.addBasket({'id':data.bookDetail.bookId, 'name':data.bookDetail.title,'img':data.bookDetail.imageLink})}>Borrow</button>
                </div>
                <div className="right-column">
                <div className="product-description">
-                  <h1>{data.title}</h1>
+                  <h1>{data.bookDetail.title}</h1>
                   <br></br>
                   <p>Description here</p>
                     
@@ -50,20 +49,21 @@ class BookDetails extends Component {
              <div className="bookDetailsNew__authorsList">
                         <span>
                           <p>Förtfattare:</p>
-                            {data.authors.map(authors => (
+                            {data.bookDetail.authors.map(authors => (
                                 <a href="#" key={authors.id}>{authors.name}</a>
                             ))}     
                         </span>
                     </div>
-             </div>
-             
+                  
+             </div> 
+              
         </div>
-        <CommentBox cmnts={data.reviews}></CommentBox> 
+        <CommentBox id={bookId}></CommentBox>     
             </div>
            
             
         )
-    }
+
 
     }
     export default connect(null, {addBasket})(BookDetails)

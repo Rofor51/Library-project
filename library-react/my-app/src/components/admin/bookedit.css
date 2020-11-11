@@ -1,5 +1,5 @@
 .container, .container-fluid {
-    margin-top: 20px;
+    margin-top: 120px;
   }  
 
   .mr10 {
@@ -14,8 +14,8 @@
 
   .book-header {
     position: relative;
-    margin-top: 20px;
-    right: 100px;
+    bottom: 90px;
+    right: 0px;
   }
 
   

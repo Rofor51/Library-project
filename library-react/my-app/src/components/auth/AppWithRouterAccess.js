@@ -7,6 +7,8 @@ import Navbar from '../Navbar';
 import BookDetail from '../../containers/BookDetail';
 import Cart from '../../containers/Cart';
 import BookEdit from '../admin/BookEdit';
+
+
 export default withRouter(class AppWithRouterAccess extends Component {
   constructor(props) {
     super(props);
@@ -19,11 +21,6 @@ export default withRouter(class AppWithRouterAccess extends Component {
 
   render() {
 
-    // Note: If your app is configured to use the Implicit Flow 
-    // instead of the Authorization Code with Proof of Code Key Exchange (PKCE)
-    // you will need to add the below property to what is passed to <Security>
-    //
-    // pkce={false}
 
     return (
     

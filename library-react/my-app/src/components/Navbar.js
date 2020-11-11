@@ -20,6 +20,8 @@ import AuthInformation from './auth/AuthInformation'
 
    
     render() {
+      
+    
         return (
             <nav className="NavBarItems">
                <Link to="/"> <h1 className="navbar-logo">Library<i className="fab fa-react"></i></h1></Link>

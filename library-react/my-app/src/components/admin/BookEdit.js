@@ -3,7 +3,6 @@ import { Link, withRouter } from 'react-router-dom';
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
 import './bookedit.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 class BookEdit extends Component {
  
   emptyItem = {
@@ -48,7 +47,6 @@ class BookEdit extends Component {
     let item = {...this.state.item};
     item.authors.push({ firstName: "", lastName: "" })
     this.setState({item});
-    console.log(this.state.item.authors.length)
   };
 
    handleRemoveClick = index => {
@@ -63,8 +61,6 @@ class BookEdit extends Component {
     const name = target.name;
     let item = {...this.state.item};
     item[name] = value;  
-    console.log(item)
-    console.log("CMON!")
     this.setState({item});
   }
 
@@ -79,14 +75,13 @@ class BookEdit extends Component {
       },
       body: JSON.stringify(item),
     });
-    this.props.history.push('/groups');
+    this.props.history.push('/');
   }
 
   render() {
     
     const {item} = this.state;
     const title = <h2 className="book-header">{item.id ? 'Edit Book' : 'Add New Book'}</h2>;
-
     return <div className="edit-container">
       <Container>
         {title}

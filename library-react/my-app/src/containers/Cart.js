@@ -26,12 +26,13 @@ const Cart = ({basketProps,clearProduct}) => {
   const handleSubmit = (product) => {
       let getProducts = [];
       getProducts = product.map(item => item.id)
-    fetch('/order/api/v1/validate', {
+    fetch('/order/api/v1/order-service', {
         method: 'POST',
         headers: {
+          Authorization: `Bearer ${authState.accessToken}`,
           'Accept': 'application/json',
           'Content-Type': 'application/json',
-        },
+       },
         body: JSON.stringify({
             userName: userInfo.email, 
             bookId: getProducts, 
@@ -43,8 +44,6 @@ const Cart = ({basketProps,clearProduct}) => {
       
   }
   
-
-
   productsInCart = basketProps.map(item=> {
     return (
         <Fragment key={item.id}>
@@ -64,11 +63,17 @@ return (
         <div className="products">
         {productsInCart}
         </div>
-        <Button onClick={() => handleSubmit(basketProps)}>Checkout</Button>
+        {authState.isAuthenticated ? (
+        <div>
+           <Button onClick={() => handleSubmit(basketProps)}>Checkout</Button>
+        </div>
+      ) : (
+        <p>Please login to check out!</p>
+      )}
     </div>
-)
- 
-}
+);
+        }
+
 const mapStateToProps = state => ({
     basketProps: state.basketState
 });

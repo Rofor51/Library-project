@@ -23,17 +23,15 @@ const AuthInformation = () => {
   const [userInfo, setUserInfo] = useState(null);
   useEffect(() => {
     if (!authState.isAuthenticated) {
-      
+    
       setUserInfo(null);
     } else {
       authService.getUser().then(info => {
         setUserInfo(info);
       });
     }
-  }, [authState, authService]); // Update if authState changes
+  }, [authState, authService]);
 
-  const accessToken = authState.accessToken;
-  console.log(accessToken)
   const button = authState.isAuthenticated ?
     <button onClick={() => {authService.logout()}}>Logout</button> :
     <button onClick={() => {authService.login()}}>Login</button>;
